@@ -79,21 +79,21 @@ module Furik
 
           title = case event.type
           when 'IssueCommentEvent'
-            "#{payload.body.plain.cut} (#{event.payload.issue.title.cut(30)})"
+            "#{payload.body.plain.cut} (#{event.payload.issue.title.cut(70)})"
           when 'CommitCommentEvent'
             payload.body.plain.cut
           when 'IssuesEvent'
             type = "#{event.payload.action}_#{type}"
-            payload.title.plain.cut
+            payload.title.plain.cut(70)
           when 'PullRequestReviewCommentEvent'
             type = 'comment'
             if event.payload.pull_request.respond_to?(:title)
-              "#{payload.body.plain.cut} (#{event.payload.pull_request.title.cut(30)})"
+              "#{payload.body.plain.cut} (#{event.payload.pull_request.title.cut(70)})"
             else
               payload.body.plain.cut
             end
           else
-            payload.title.plain.cut
+            payload.title.plain.cut(70)
           end
 
           link = payload.html_url
